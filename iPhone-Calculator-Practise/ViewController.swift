@@ -11,7 +11,8 @@ import UIKit
 class ViewController: UIViewController {
 
     var printLabel: UILabel!
-    
+    var currentNumber = ""
+    var
     
     @IBOutlet var button: [UIButton]!
 
