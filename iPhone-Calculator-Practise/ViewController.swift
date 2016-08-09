@@ -10,11 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var printLabel: UILabel!
     var currentNumber = ""
-    var
+    var leftNum = 0
+    var rightNum = 0
+    let btnArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
     
     @IBOutlet var button: [UIButton]!
+    @IBOutlet weak var outputLbl: UILabel!
 
     
     
@@ -28,10 +30,58 @@ class ViewController: UIViewController {
         
     }
 
-    @IBAction func onButtonPressed(sender: UIButton) {
+    @IBAction func onNumberPressed(numberBtn: UIButton!) {
+        let numberIndex = numberBtn.tag
+        currentNumber += btnArray[numberIndex]
+        outputLbl.text = currentNumber
+        
         
     }
+    
+    @IBAction func onDotPressed(dotButton: UIButton!) {
+        let dotIndex = dotButton.tag
+        if checkDecimal() == false {
+            if currentNumber == ""{
+                currentNumber = "0" + btnArray[dotIndex]
+                outputLbl.text = currentNumber
+            } else {
+                currentNumber += btnArray[dotIndex]
+                outputLbl.text = currentNumber
+            }
+        }
+    }
 
-
+    @IBAction func onZeroPressed(zeroButton: UIButton!) {
+        let zeroIndex = zeroButton.tag
+        if checkZeroValue() == false {
+            currentNumber += btnArray[zeroIndex]
+            outputLbl.text = currentNumber
+        }
+    }
+    
+    @IBAction func clearUp(sender: UIButton) {
+        currentNumber = ""
+        outputLbl.text = "0"
+        
+    }
+    
+    
+    func checkDecimal() -> Bool {
+        if currentNumber.characters.contains(".") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func checkZeroValue() -> Bool {
+        if Double(currentNumber) == nil {
+            print("Yeah")
+            return true
+        } else {
+            print("Why")
+            return false
+        }
+    }
 }
 
