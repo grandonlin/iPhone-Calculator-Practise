@@ -26,16 +26,14 @@ class ViewController: UIViewController {
         for btn in button {
             btn.layer.borderWidth = 0.25
         }
-        
-        
     }
 
     @IBAction func onNumberPressed(numberBtn: UIButton!) {
         let numberIndex = numberBtn.tag
-        currentNumber += btnArray[numberIndex]
-        outputLbl.text = currentNumber
-        
-        
+        if checkMaxNumber() == false {
+            currentNumber += btnArray[numberIndex]
+            outputLbl.text = currentNumber
+        }
     }
     
     @IBAction func onDotPressed(dotButton: UIButton!) {
@@ -62,7 +60,6 @@ class ViewController: UIViewController {
     @IBAction func clearUp(sender: UIButton) {
         currentNumber = ""
         outputLbl.text = "0"
-        
     }
     
     
@@ -76,10 +73,16 @@ class ViewController: UIViewController {
     
     func checkZeroValue() -> Bool {
         if Double(currentNumber) == nil {
-            print("Yeah")
             return true
         } else {
-            print("Why")
+            return false
+        }
+    }
+    
+    func checkMaxNumber() -> Bool {
+        if currentNumber.characters.count >= 10 {
+            return true
+        } else {
             return false
         }
     }
